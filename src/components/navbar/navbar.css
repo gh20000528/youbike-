@@ -1,0 +1,47 @@
+.navbar{
+  display: flex;
+  padding: 6px 124px;
+  border-bottom: 1px solid #EBEBEB;
+  align-items: center;
+}
+
+.logo{
+  width: 95px;
+  height: 95px;
+}
+
+.item{
+  width: 100%;
+  display: flex;
+  padding: 0 60px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list{
+  gap: 40px;
+  display: flex;
+}
+
+.list li{
+  list-style: none;
+  color:#677510;
+  font-weight: 500;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.list a{
+  text-decoration: none;
+  color: #677510;
+}
+
+.btn{
+  border: none;
+  color: #fff;
+  font-weight: 400;
+  font-size: 18px;
+  background-color: #B5CC22;
+  padding: 10px 24px;
+  border-radius: 100px;
+}
