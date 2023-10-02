@@ -1,4 +1,9 @@
+
 .selectcity{
+  display: flex;
+  align-items: center;
+}
+.dropdown{
   margin: 40px 0;
   padding: 8px 16px;
   width: 175px;
@@ -8,10 +13,6 @@
   background-color: #f6f6f6;
 }
 
-option:checked {
-  background-color: #007bff;
-  color: #fff;
-}
 
 .search{
   width: 277px;
@@ -24,13 +25,10 @@ option:checked {
 }
 
 .selectall{
-  display: flex;
-  align-items: center;
   justify-content: center;
 }
 
 .checkbox{
-
   margin: 11px;
 }
 
@@ -45,6 +43,7 @@ label{
 }
 
 .left{
+  width: 615px;
   display: flex;
   padding-top: 20px;
   flex-wrap: wrap;
@@ -55,3 +54,33 @@ label{
   width: 500px;
   height: 170px;
 }
+
+.searchicon{
+  font-size: 20px;
+  margin-left: -50px;
+  cursor: pointer;
+}
+
+.cleanbtn{
+  margin-left: 30px;
+  border: none;
+  color: #fff;
+  font-weight: 400;
+  font-size: 18px;
+  background-color: #B5CC22;
+  padding: 5px 24px;
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.cleanbtn:hover{
+  background-color: red;
+}
+
+option {
+  /* 添加你想要的樣式 */
+  background-color: #f1f1f1;
+  color: #333;
+  padding: 8px;
+}
+

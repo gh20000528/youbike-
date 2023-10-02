@@ -10,7 +10,6 @@ const ShowTable = () => {
 			try{
 					const res = await axios.get("https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json")
 					setAllBike(res.data)
-					console.log(res.data.sarea);
 			}catch(err){
 					console.log(err);
 			}
@@ -31,7 +30,7 @@ const ShowTable = () => {
         </thead>
         <tbody>
         {allBike.slice(0, 6).map((station, index) => (
-            <tr key={station.id} className={ index % 2 === 0 ? 'even-row' : 'odd-row'}>
+            <tr key={index} className={ index % 2 === 0 ? 'even-row' : 'odd-row'}>
               <td>台北市</td>
               <td>{station.sarea}</td>
               <td>{station.sna}</td>
