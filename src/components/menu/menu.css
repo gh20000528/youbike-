@@ -1,0 +1,57 @@
+.selectcity{
+  margin: 40px 0;
+  padding: 8px 16px;
+  width: 175px;
+  height: 40px;
+  border-radius: 8px;
+  border: none;
+  background-color: #f6f6f6;
+}
+
+option:checked {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.search{
+  width: 277px;
+  height: 40px;
+  border-radius: 8px;
+  padding: 0px 16px;
+  border: none;
+  background-color: #f6f6f6;
+  margin: 0 16px;
+}
+
+.selectall{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox{
+
+  margin: 11px;
+}
+
+label{
+  font-size: 18px;
+  color: #323232;
+}
+
+.sarea{
+  display: flex;
+  gap: 75px;
+}
+
+.left{
+  display: flex;
+  padding-top: 20px;
+  flex-wrap: wrap;
+}
+
+
+.img{
+  width: 500px;
+  height: 170px;
+}

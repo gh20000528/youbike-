@@ -1,0 +1,33 @@
+.biketable{
+  margin-top: 40px;
+  width: 1200px;
+  height: 500px;
+  border-collapse: collapse;
+  overflow: hidden;
+  border: 0.5px solid #ccc;
+  border-radius: 28px;
+  margin: auto;
+}
+
+.biketable thead{
+  background-color: #B5CC22;
+  border-radius: 28px 28px 0 0
+}
+
+.biketable thead tr th{ 
+  color: white;
+  padding: 21px 0;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.biketable tbody tr td{
+  padding: 24px 0;
+  text-align: center;
+}
+
+.odd-row{
+  background-color: #f6f6f6;
+}
+
+
