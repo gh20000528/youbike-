@@ -13,7 +13,10 @@ const Menu = () => {
 	const [allBike, setAllBike] = useState([])
 	const [selectedCity, setSelectedCity] = useState('')
   const [selectedDistricts, setSelectedDistricts] = useState([])
-	const [checked, setChecked] = useState(true)
+	const [search, setSearch] = useState('')
+	const [selectAll, setSelectAll] = useState(true);
+	const [cityCheckboxes, setCityCheckboxes] = useState({});
+	console.log(selectedDistricts)
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -47,50 +50,78 @@ const Menu = () => {
     const cityData = fakeCitiesData.find(city => city.name === selectedCity)
     const districts = cityData ? cityData.district : []
     setSelectedDistricts(districts)
-		setChecked(true)
   };
-
-	const handleDistrictChange = (event) => {
-    const selectedDistrict = event.target.value
-    const isSelected = selectedDistricts.includes(selectedDistrict)
-
-    if (isSelected) {
-      setSelectedDistricts(selectedDistricts.filter(district => district !== selectedDistrict))
-    } else {
-      setSelectedDistricts([...selectedDistricts, selectedDistrict])
-    }
-  }
-
-	const checkeHandler = () => {
-		setChecked(!checked)
-	}
 
 	const cleanhandler = () => {
 		setSelectedCity('')
 		setSelectedDistricts([])
 	}
 
+	const searchHandler = (e) => {
+		e.preventDefault()
+
+	}
+
+	useEffect(() => {
+		const initialCityCheckboxes = {}
+		allBike.forEach(bike => {
+			initialCityCheckboxes[bike.sarea] = true
+		})
+		setCityCheckboxes(initialCityCheckboxes)
+	}, [allBike])
+
+  const handleSelectAll = () => {
+    setSelectAll(!selectAll);
+
+    const updatedCityCheckboxes = {};
+    Object.keys(cityCheckboxes).forEach((city) => {
+      updatedCityCheckboxes[city] = !selectAll;
+    });
+
+    setCityCheckboxes(updatedCityCheckboxes);
+  };
+
+  const handleCityCheckboxChange = (district) => {
+    const updatedCityCheckboxes = { ...cityCheckboxes };
+    updatedCityCheckboxes[district] = !updatedCityCheckboxes[district];
+
+    // 檢查是否全部選中，是的話設定全選狀態為 true
+    const allChecked = Object.values(updatedCityCheckboxes).every((checkbox) => checkbox);
+    setSelectAll(allChecked);
+
+    setCityCheckboxes(updatedCityCheckboxes);
+  };
   return (
     <div>
 			<div className='selectcity'>
 				<FormControl>
 					<Select className="dropdown" onChange={handleCityChange} value={selectedCity}>
+					<MenuItem value="" disabled className="defaultMenuItem">請選擇縣市</MenuItem>
 						{fakeCitiesData.map((city, index) => (
 							<MenuItem key={index} value={city.name} className="cityitem">{city.name}</MenuItem>
 						))}
 					</Select>
 				</FormControl>
-				<input type="text" placeholder='搜尋站點' className='search'/>
-				<AiOutlineSearch className='searchicon'/>
+				<input 
+					type="text" 
+					placeholder='搜尋站點' 
+					className='search'
+					value={search}
+					onChange={(e) => setSearch(e.target.value)}
+					/>
+				<AiOutlineSearch 
+					className='searchicon' 
+					onClick={searchHandler}
+				/>
 				<button onClick={cleanhandler} className='cleanbtn'>一鍵刪除</button>
 			</div>
 			<div className=''>
 				<input 
 					type="checkbox" 
-					name='selectall' 
-					className='checkbox'
-					checked={checked}
-					onChange={checkeHandler} />
+          name='selectall' 
+          className='checkbox' 
+          checked={selectAll} 
+          onChange={handleSelectAll}  />
 				<label htmlFor="selectall">全部勾選</label>
 			</div>
 			<div className='sarea'>
@@ -99,12 +130,12 @@ const Menu = () => {
 						<div key={index}>
 							<input 
 							type="checkbox"
-							name='selectall'
+							name='select'
 							className='checkbox'
-							checked={checked}
-							onChange={handleDistrictChange}
+							checked={cityCheckboxes[district]}
+              onChange={() => handleCityCheckboxChange(district)}
 							value={district}/>
-							<label htmlFor="selectall">{district}</label>
+							<label htmlFor="select">{district}</label>
 						</div>
 					))}
 				</div>

@@ -17,7 +17,7 @@ const ShowTable = () => {
 		All()
 		},[])
   return (
-    <div>
+    <div className='table'>
       <table className='biketable'>
         <thead>
           <tr>
