@@ -7,13 +7,13 @@
     position: relative;
   }
   .dropdown{
-    width: 310px;
+    width: 100%;
     height: 40px;
     order: 2;
     margin: 15px 0;
   }
   .search{
-    width: 310px;
+    width: 100%;
     height: 40px;
     border-radius: 8px;
     border: none;
@@ -23,7 +23,7 @@
   .searchicon{
     position: absolute;
     font-size: 25px;
-    right: 30px;
+    right: 20px;
     top: 6px;
   }
   .img{
