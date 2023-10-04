@@ -15,7 +15,7 @@ const Navbar = () => {
   }
   return (
     <div className='navbar'>
-      <img src="https://www.youbike.com.tw/region/assets/images/logo.svg" alt="" className='logo'/>
+      <img src={process.env.PUBLIC_URL + '/youbikeLogo.png'} alt="" className='logo'/>
       <div className='hamburger'>
         { open ? 
           <AiOutlineClose onClick={ openHandler }/>:

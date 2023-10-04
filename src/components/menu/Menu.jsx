@@ -1,35 +1,35 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import  { useState, useEffect } from 'react'
 import { AiOutlineSearch } from "react-icons/ai"
 import axios from 'axios'
 import './menu.css'
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
+import { searchBikeContext } from '../../context/searchBikeContext'
 
 
-const Menu = () => {
-	const [allBike, setAllBike] = useState([])
+const Menu = (props) => {
+	// const [allBike, setAllBike] = useState([])
 	const [selectedCity, setSelectedCity] = useState('')
   const [selectedDistricts, setSelectedDistricts] = useState([])
 	const [search, setSearch] = useState('')
 	const [selectAll, setSelectAll] = useState(true);
 	const [cityCheckboxes, setCityCheckboxes] = useState({});
-	console.log(selectedDistricts)
+	const { searchBike, allBike } = useContext(searchBikeContext)
 
-	useEffect(() => {
-		const fetchData = async () => {
-		try {
-			const res = await axios.get("https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json")
-			setAllBike(res.data)
-		} catch (err) {
-			console.log(err)
-		}
-	}
+	// useEffect(() => {
+	// 	const fetchData = async () => {
+	// 	try {
+	// 		const res = await axios.get("https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json")
+	// 		setAllBike(res.data)
+	// 	} catch (err) {
+	// 		console.log(err)
+	// 	}
+	// }
 
-		fetchData()
-	}, [])
+	// 	fetchData()
+	// }, [])
 
 	const sareaValues = allBike.map(station => station.sarea)
 	const uniqueSareas = [...new Set(sareaValues)]
@@ -55,12 +55,20 @@ const Menu = () => {
 	const cleanhandler = () => {
 		setSelectedCity('')
 		setSelectedDistricts([])
+		setSearch('')
+		searchBike(allBike)
 	}
 
 	const searchHandler = (e) => {
 		e.preventDefault()
 
+		const filteredBikes = allBike.filter(bike => {
+			return bike.sarea.toLowerCase().includes(search.toLowerCase());
+		});
+	
+		searchBike(filteredBikes);
 	}
+
 
 	useEffect(() => {
 		const initialCityCheckboxes = {}

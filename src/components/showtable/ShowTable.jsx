@@ -1,21 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import  { useState, useEffect } from 'react'
 import axios from 'axios'
+import { searchBikeContext } from '../../context/searchBikeContext'
 import './showtable.css'
 
 const ShowTable = () => {
-  const [allBike, setAllBike] = useState([])
-	useEffect(() => {
-		const All = async () =>{
-			try{
-					const res = await axios.get("https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json")
-					setAllBike(res.data)
-			}catch(err){
-					console.log(err);
-			}
-		}
-		All()
-		},[])
+  const { bike, allBike } = useContext(searchBikeContext)
+
+  const dataToDisplay = bike.length > 0 ? bike : allBike;
+
+  
   return (
     <div className='table'>
       <table className='biketable'>
@@ -29,7 +23,7 @@ const ShowTable = () => {
           </tr>
         </thead>
         <tbody>
-        {allBike.slice(0, 6).map((station, index) => (
+        {dataToDisplay.map((station, index) => (
             <tr key={index} className={ index % 2 === 0 ? 'even-row' : 'odd-row'}>
               <td>台北市</td>
               <td>{station.sarea}</td>
